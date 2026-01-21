@@ -1,1 +1,22 @@
+<h2>💰 Dashboard</h2>
+<p>Balance: <span id="balance">$0</span></p>
+<p>XP: <span id="xp">0</span></p>
+<p>Level: <span id="level">1</span></p>
 
+<a href="tasks.html">📝 Tasks</a> |
+<a href="spin.html">🎰 Spin Wheel</a> |
+<a href="auto-ads.html">📺 Auto Ads</a> |
+<a href="leaderboard.html">🏆 Leaderboards</a> |
+<a href="referral.html">👥 Referral</a> |
+<a href="withdraw.html">💸 Withdraw</a>
+
+<script>
+async function loadUser(){
+  const res = await fetch("/api/user?chatId=USER_CHAT_ID");
+  const data = await res.json();
+  document.getElementById("balance").innerText="$"+data.balance.toFixed(3);
+  document.getElementById("xp").innerText=data.xp;
+  document.getElementById("level").innerText=data.level;
+}
+loadUser();
+</script>
