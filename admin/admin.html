@@ -1,1 +1,36 @@
+<h2>🛠 Admin Panel</h2>
+<p>Admin: @manager672</p>
 
+<button onclick="loadUsers()">View Users</button>
+<button onclick="loadWithdraws()">Withdraw Requests</button>
+
+<div id="users"></div>
+<div id="withdraws"></div>
+
+<script>
+const ADMIN_ID = 804373360;
+
+async function loadUsers(){
+  const res = await fetch("/api/leaderboard");
+  const data = await res.json();
+  let html = "<h3>Top Earners</h3>";
+  data.topEarners.forEach(u=>{
+    html+=`${u.username} → $${u.earnings}<br>`;
+  });
+  html+="<h3>Top Referrers</h3>";
+  data.topRef.forEach(u=>{
+    html+=`${u.username} → ${u.referrals.length} referrals<br>`;
+  });
+  document.getElementById("users").innerHTML = html;
+}
+
+async function loadWithdraws(){
+  const res = await fetch("/api/withdraws"); // create api/withdraws.js to get all requests
+  const data = await res.json();
+  let html = "<h3>Withdraw Requests</h3>";
+  data.forEach(w=>{
+    html+=`${w.chatId} → $${w.amount} → ${w.status}<br>`;
+  });
+  document.getElementById("withdraws").innerHTML = html;
+}
+</script>
