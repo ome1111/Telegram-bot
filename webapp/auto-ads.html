@@ -1,1 +1,26 @@
+<h2>📺 Watch Ads</h2>
+<button onclick="adsGramVideo()">▶ AdsGram Video</button>
+<button onclick="gigaPubVideo()">▶ GigaPub Video</button>
+<button onclick="clickMonetag()">▶ Monetag / Adsterra Click</button>
 
+<script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+<script src="https://ad.gigapub.tech/script?id=5303"></script>
+<script src="//libtl.com/sdk.js" data-zone="10461065" data-sdk="show_10461065"></script>
+
+<script>
+const AdController = window.Adsgram.init({ blockId: "21284" });
+AdController.on('reward', ()=>fetch('/api/credit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId:'USER_CHAT_ID',revenue:0.001,type:'video_ad'})}));
+
+function adsGramVideo(){ AdController.show(); }
+
+function gigaPubVideo(){ 
+  window.showGiga()
+    .then(()=>fetch('/api/credit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId:'USER_CHAT_ID',revenue:0.001,type:'video_ad'})}))
+    .catch(e=>console.log(e));
+}
+
+function clickMonetag(){ 
+  window.open("https://otieu.com/4/10070099","_blank"); 
+  setTimeout(()=>fetch('/api/credit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chatId:'USER_CHAT_ID',revenue:0.001,type:'ad_click'})}),20000);
+}
+</script>
