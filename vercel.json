@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "bot/*.js", "use": "@vercel/node" },
+    { "src": "api/*.js", "use": "@vercel/node" },
+    { "src": "webapp/**/*.html", "use": "@vercel/static" },
+    { "src": "admin/**/*.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/bot", "dest": "bot/bot.js" },
+    { "src": "/api/(.*)", "dest": "api/$1.js" },
+    { "src": "/(.*)", "dest": "webapp/$1.html" }
+  ]
+}
